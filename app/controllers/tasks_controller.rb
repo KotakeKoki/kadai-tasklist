@@ -1,13 +1,12 @@
 class TasksController < ApplicationController
 before_action :set_task, only: [:show, :edit, :update, :destroy]
-before_action :require_user_logged_in, only: [:index, :show,:edit]
+before_action :require_user_logged_in, only: [:index, :show, :edit]
 
 def index
     @tasks = current_user.tasks.all
 end
 
 def show
-   set_task
 end
 
 def new
@@ -26,11 +25,9 @@ def create
 end
 
 def edit
-   set_task
 end
 
 def update
-    set_task
     if @task.update(task_params)
         flash[:success] = "編集に成功しました"
         redirect_to @task
@@ -41,7 +38,6 @@ def update
 end
 
 def destroy
-    set_task
     @task.destroy
 
     flash[:success] = 'タスクは正常に削除されました'
