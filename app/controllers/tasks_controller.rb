@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
 before_action :set_task, only: [:show, :edit, :update, :destroy]
-before_action :require_user_logged_in, only: [:index, :show, :edit]
+before_action :require_user_logged_in, only: [:index, :show, :edit, :new, :create]
 
 def index
     @tasks = current_user.tasks.all
@@ -15,6 +15,7 @@ end
 
 def create
     @task = current_user.tasks.build(task_params)
+    @task.user_id = current_user.id
     if @task.save
         flash[:success] = "保存に成功しました"
         redirect_to @task
