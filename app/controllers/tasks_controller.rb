@@ -50,6 +50,16 @@ private
  
 def task_params
     params.require(:task).permit(:content, :status, :user_id)
+<<<<<<< HEAD
+=======
+end
+
+def correct_user
+    @task = current_user.tasks.find_by(id: params[:id])
+    unless @task
+      redirect_to root_url
+    end
+>>>>>>> 5da3908ac2745fc97116b596cfe0889081fc90d4
 end
 
 def correct_user
